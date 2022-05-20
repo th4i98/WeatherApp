@@ -43,16 +43,16 @@ function a11yProps(index) {
     };
 }
 
-export default function NavBar() {
+export default function NavBar(props) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
+    const weatherData = props.sendDataToNav;
     return (
         <Box sx={{ width: "100%" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box sx={{  }}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -67,10 +67,10 @@ export default function NavBar() {
                 value={value}
                 index={0}
             >
-                <GridCard></GridCard>
+                <GridCard sendDataToGrid={weatherData}></GridCard>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <WeekContent></WeekContent>
+                <WeekContent sendDataToWeek={weatherData}></WeekContent>
             </TabPanel>
         </Box>
     );

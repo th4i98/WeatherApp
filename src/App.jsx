@@ -1,17 +1,23 @@
 import * as React from 'react';
 import { Container } from '@mui/material';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
-
 import NavBar from "./components/navbar/navbar";
 import Sidebar from './components/Sidebar/Sidebar';
-
-import { blueGrey } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 
 function App() {
-    const primary = blueGrey[100];
-    const secondary = blueGrey[300];
+    const primary = blue[100];
+    const secondary = blue[300];
+    const [weatherDetail, setWeatherDetail] = useState({})
+
+    const sendDataToApp = (data) => {
+       console.log(data);
+        setWeatherDetail(data);  
+    }
 
   return (
+       
       <div className="App">
           <Container fixed>
               <Box sx={{ display: "flex", m: 4 }}>
@@ -23,7 +29,7 @@ function App() {
                           backgroundColor: primary,
                       }}
                   >
-                      <Sidebar></Sidebar>
+                      <Sidebar sendDataToApp={sendDataToApp}></Sidebar>
                   </Box>
                   {/* Nav bar */}
                   <Box
@@ -34,7 +40,7 @@ function App() {
                       }}
                   >
                       <Box sx={{ width: "100%", typography: "body1" }}>
-                          <NavBar></NavBar>
+                          <NavBar sendDataToNav={weatherDetail}></NavBar>
                       </Box>
                   </Box>
               </Box>
