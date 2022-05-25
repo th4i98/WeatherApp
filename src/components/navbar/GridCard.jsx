@@ -8,6 +8,8 @@ import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
 import { RiTempColdLine } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
 import { makeStyles } from "@mui/styles"; 
+import { useDispatch, useSelector } from "react-redux";
+
 
 const useStyle = makeStyles({
     todayCardHeader: {
@@ -25,14 +27,10 @@ const useStyle = makeStyles({
 });
 
 export default function GridCard(props) {
-    const classes = useStyle()
-    let data = props.sendDataToGrid;
-    console.log(data);
+    const classes = useStyle();
+    const weatherData = useSelector((state) => state.weather.weather)
     return (
         <Grid container spacing={2}>
-            {/* <Grid item xs={4}>
-                <TodayContent sendData={data} />
-            </Grid> */}
             <Grid item xs={4}>
                 <Card>
                     <CardContent>
@@ -40,7 +38,7 @@ export default function GridCard(props) {
                         <div className={classes.todayContent}>
                             <BsSun />
                             <div className={classes.contentDescript}>
-                                {data.current && data.current.uvi} nm
+                                {weatherData.current && weatherData.current.uvi} nm
                             </div>
                         </div>
                     </CardContent>
@@ -52,9 +50,9 @@ export default function GridCard(props) {
                         <div className={classes.todayCardHeader}>Sunrise</div>
                         <div className={classes.todayContent}>
                             <WiSunrise />
-                            {data.current && (
+                            {weatherData.current && (
                                 <div className={classes.contentDescript}>
-                                    {dtToTime(data.current.sunrise)}
+                                    {dtToTime(weatherData.current.sunrise)}
                                 </div>
                             )}
                         </div>
@@ -67,9 +65,9 @@ export default function GridCard(props) {
                         <div className={classes.todayCardHeader}>Sunset</div>
                         <div className={classes.todayContent}>
                             <WiSunset />
-                            {data.current && (
+                            {weatherData.current && (
                                 <div className={classes.contentDescript}>
-                                    {dtToTime(data.current.sunset)}
+                                    {dtToTime(weatherData.current.sunset)}
                                 </div>
                             )}
                         </div>
@@ -83,7 +81,7 @@ export default function GridCard(props) {
                         <div className={classes.todayContent}>
                             <WiHumidity />
                             <div className={classes.contentDescript}>
-                                {data.current && data.current.humidity}%
+                                {weatherData.current && weatherData.current.humidity}%
                             </div>
                         </div>
                     </CardContent>
@@ -96,7 +94,7 @@ export default function GridCard(props) {
                         <div className={classes.todayContent}>
                             <RiTempColdLine />
                             <div className={classes.contentDescript}>
-                                {data.current && data.current.pressure} hPa
+                                {weatherData.current && weatherData.current.pressure} hPa
                             </div>
                         </div>
                     </CardContent>
@@ -111,7 +109,7 @@ export default function GridCard(props) {
                         <div className={classes.todayContent}>
                             <MdVisibility />
                             <div className={classes.contentDescript}>
-                                {data.current && data.current.visibility} metres
+                                {weatherData.current && weatherData.current.visibility} metres
                             </div>
                         </div>
                     </CardContent>

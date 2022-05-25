@@ -49,7 +49,7 @@ export default function NavBar(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const weatherData = props.sendDataToNav;
+    // const weatherData = props.sendDataToNav;
     return (
         <Box sx={{ width: "100%" }}>
             <Box sx={{  }}>
@@ -67,10 +67,10 @@ export default function NavBar(props) {
                 value={value}
                 index={0}
             >
-                <GridCard sendDataToGrid={weatherData}></GridCard>
+                <GridCard ></GridCard>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <WeekContent sendDataToWeek={weatherData}></WeekContent>
+                <WeekContent ></WeekContent>
             </TabPanel>
         </Box>
     );
