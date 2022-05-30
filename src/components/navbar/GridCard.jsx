@@ -8,8 +8,8 @@ import { WiHumidity, WiSunrise, WiSunset } from "react-icons/wi";
 import { RiTempColdLine } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
 import { makeStyles } from "@mui/styles"; 
-import { useDispatch, useSelector } from "react-redux";
-
+import { useSelector } from "react-redux";
+import { statusSelector, weatherSelector } from "../../redux-toolkit/weatherSlice";
 
 const useStyle = makeStyles({
     todayCardHeader: {
@@ -28,7 +28,7 @@ const useStyle = makeStyles({
 
 export default function GridCard(props) {
     const classes = useStyle();
-    const weatherData = useSelector((state) => state.weather.weather)
+    const weatherData = useSelector(weatherSelector);
     return (
         <Grid container spacing={2}>
             <Grid item xs={4}>

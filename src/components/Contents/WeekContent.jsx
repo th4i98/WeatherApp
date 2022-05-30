@@ -3,12 +3,10 @@ import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
-import weatherApi2 from "../../apis/weatherApi2";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { dtToDay } from "../helpers/convertDate";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Box from "@mui/material/Box";
 import { dtToTime } from "../helpers/convertDtToHour";
 
 
@@ -46,25 +44,8 @@ export default function WeekContent(props) {
     const weatherData = useSelector((state) => state.weather.weather)
     console.log(weatherData.daily);
     const dailyData = weatherData.daily;
-    // const data = props.sendDataToWeek;
     const [dailyWeather, setDailyWeather] = useState(dailyData[0]);// Mảng lưu dữ liệu thời tiết 7 ngày tới trả về từ api Onecall
     console.log(dailyWeather);
-    // setDailyWeather(weatherData.daily)
-    // const [dailyWeatherDetail, setDailyWeatherDetail] = useState(data?.daily[0]); // State lưu dữ liệu chi tiết của 1 ngày
-    
-    // console.log(data);
-    // const lat = data.lat;
-    // const lon = data.lon; 
-
-    // const getDailyForecast = async () => {
-    //     const response = await weatherApi2.GETWEATHERONECALL({lat: lat, lon: lon});
-    //     setDailyWeather(response.daily);  
-    //     console.log(response.daily);
-    // }
-    // // Dùng useEffect để tránh bị infinity loop call api khi gọi hàm setDailyWeather
-    // useEffect(() => {
-    //     getDailyForecast();
-    // }, [])
 
     // Set dữ liệu chi tiết của 1 ngày, lấy từ mảng
     const dailyContentDetail = (item) => {

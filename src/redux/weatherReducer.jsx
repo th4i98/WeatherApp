@@ -2,11 +2,11 @@ import weatherApi2 from '../apis/weatherApi2'
 import types from '../const/type';
 import weatherAction from './weatherAction';
 import { getPreciseLocation} from '../apis/getPreciseLocation'
+
 export const getWeatherAsync = (city = '') => {
     
     return async(dispatch)=>{
         let lat=0,lon=0;
-
       
         if(city === ''){
             const currentPostion = await getPreciseLocation();
@@ -14,11 +14,9 @@ export const getWeatherAsync = (city = '') => {
             lon=currentPostion[1];
         }
         else{
-            const position = await weatherApi2.GETNAMEDIRECT({ q: city });
-            
+            const position = await weatherApi2.GETNAMEDIRECT({ q: city });        
             lat = position[0].lat;
             lon = position[0].lon;
-
         }
         const weather = await weatherApi2.GETWEATHERONECALL({ lat: lat, lon: lon });
         
@@ -27,10 +25,20 @@ export const getWeatherAsync = (city = '') => {
         dispatch(weatherAction.GET_WEATHER({...weather,cityName: cityname}))
     }
 };
+
 const initState = {
     weather: {
     }
 };
+
+// const slice = createSlice({
+//     name: "slice",
+//     initState,
+//     extraReducers: {
+//         builder
+//     }
+// });
+
 const weatherReducer = (state = initState, action) => {
 
     switch (action.type) {
@@ -39,9 +47,9 @@ const weatherReducer = (state = initState, action) => {
                 ...state,
                 weather: action.payload
             }
-            
         default:
             return state;
     }
 };
-export default weatherReducer
+export default weatherReducer; 
+
